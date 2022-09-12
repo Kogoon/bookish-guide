@@ -4,7 +4,7 @@ import os
 
 DB_USER_NAME='admin'
 DB_USER_PASSWD='1q2w3e4r!'
-DB_HOST='testdb.cdfnd5ogvaqo.ap-northeast-2.rds.amazonaws.com'
+DB_HOST='database-1.cdfnd5ogvaqo.ap-northeast-2.rds.amazonaws.com'
 DB_NAME='flaskapp'
 
 #SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://testdb.cdfnd5ogvaqo.ap-northeast-2.rds.amazonaws.com'
