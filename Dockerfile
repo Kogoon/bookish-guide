@@ -15,6 +15,5 @@ COPY ./requirements.txt /root/requirements.txt
 RUN pip install -r requirements.txt
 
 ENV FLASK_APP app
-RUN flask db migrate
 
 CMD flask run --host 0.0.0.0 -p 5001
