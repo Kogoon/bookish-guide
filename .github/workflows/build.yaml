@@ -1,0 +1,61 @@
+name: Deploy to Amazon ECR
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      
+env:
+  AWS_REGION: ap-northeast-2
+  REPOSITORY: brokurly-register
+  
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}       
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    # # Github Repository Secrets를 통해 환경 변수 파일을 생성합니다.
+    # - name: Generate Environment Variables File for Production
+    #   echo "REACT_APP_DEBUG=$REACT_APP_DEBUG" >> .env.production
+    #   env:
+    #     ELASTIC_SECRET_TOKEN: ${{ secrets.ELASTIC_SECRET_TOKEN }}
+    #     ELASTIC_SERVER_URL: ${{ secrets.ELASTIC_SERVER_URL }}
+
+    - name: Build, tag, and push image to Amazon ECR
+      id: build-image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        #ECR_REGISTRY: public.ecr.aws
+        IMAGE_TAG: ${{ github.sha }}
+      
+      run: |
+        echo "######### BUILD START #########"
+        echo "$ECR_REGISTRY"
+        docker build -t $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG .
+        echo "########## BUILD END #########"
+        echo "### PUSH $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG ###"
+        docker push $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG
+        echo "::set-output name=image::$ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG"
+        echo "########## CHANGE TAG FOR DEPLOY ##########"
+        docker tag $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$REPOSITORY:latest
+        docker push $ECR_REGISTRY/$REPOSITORY:latest
+        echo "########## WORK END ##########"
