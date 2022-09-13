@@ -9,7 +9,6 @@ RUN apt install -y python3-pip
 
 COPY ./app/ /root/app/
 COPY ./config.py /root/config.py
-COPY ./migrations /root/migrations
 COPY ./requirements.txt /root/requirements.txt
 
 RUN pip install -r requirements.txt
