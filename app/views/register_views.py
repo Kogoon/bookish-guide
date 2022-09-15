@@ -18,7 +18,7 @@ def register():
     if request.method == 'POST' and form.validate_on_submit():
         user = UserModel.query.filter_by(name=form.name.data).first()
         if not user:
-            user = UserModel(name=form.name.data,
+            user = UserModel(
                         user_id=form.user_id.data,
                         password=generate_password_hash(form.password.data),
                         email=form.email.data,
@@ -27,7 +27,7 @@ def register():
             db.session.add(user)
             db.session.commit()
 
-            return redirect('http://www.kogoon.me')
+            return redirect('https://www.kogoon.me')
             
         else:
             flash('이미 존재하는 사용자입니다.')
