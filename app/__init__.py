@@ -18,7 +18,7 @@ def create_app():
     # Set the required service name. Allowed characters:
     # a-z, A-Z, 0-9, -, _, and space
     #'SERVICE_NAME': 'unknown-python-service',
-    'SERVICE_NAME': 'brokurly-register',
+    'SERVICE_NAME': 'brokurly',
 
     # Use if APM Server requires a secret token
     'SECRET_TOKEN': 'pRbQ84U8iPrAElKP3xiQmw',
