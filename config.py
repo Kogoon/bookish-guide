@@ -10,3 +10,18 @@ DB_NAME='brokurlyapp'
 #SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://testdb.cdfnd5ogvaqo.ap-northeast-2.rds.amazonaws.com'
 SQLALCHEMY_DATABASE_URI = 'mysql://{}:{}@{}/{}?charset=utf8'.format(DB_USER_NAME, DB_USER_PASSWD, DB_HOST, DB_NAME)
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# app config
+class Config:
+    ROOT_DIR = ROOT_DIR
+    STATIC_DIR = '{0}/static'.format(ROOT_DIR)
+    TEMPLATES_DIR = '{0}/templates'.format(ROOT_DIR)
+    ERROR_CODE = {
+        40000: 'Bad Request',
+        41000: 'Gone',
+        40300: 'Forbidden',
+        40400: 'Not Found',
+        50000: 'Internal Server Error',
+    }
