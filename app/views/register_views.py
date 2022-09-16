@@ -11,6 +11,9 @@ from app.models import UserModel
 
 bp = Blueprint('register', __name__, url_prefix='/register')
 
+@bp.route('/test')
+def test():
+    return {"response" : "ok"}
 
 @bp.route('/', methods=('GET', 'POST'))
 def register():
