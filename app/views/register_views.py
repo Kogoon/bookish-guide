@@ -16,7 +16,7 @@ bp = Blueprint('register', __name__, url_prefix='/register')
 def register():
     form = UserCreateForm()
     if request.method == 'POST' and form.validate_on_submit():
-        user = UserModel.query.filter_by(name=form.name.data).first()
+        user = UserModel.query.filter_by(user_id=form.user_id.data).first()
         if not user:
             user = UserModel(
                         user_id=form.user_id.data,
