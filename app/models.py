@@ -12,6 +12,7 @@ class UserMixin:
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     create_date = db.Column(db.DateTime(), nullable=False)
+    Allergy_List = db.Column(db.String(50))
 
 
 class UserModel(UserMixin, flask_login.UserMixin, db.Model):
