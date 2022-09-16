@@ -22,7 +22,8 @@ def register():
                         user_id=form.user_id.data,
                         password=generate_password_hash(form.password.data),
                         email=form.email.data,
-                        create_date=datetime.now()
+                        create_date=datetime.now(),
+                        Allergy_list=""
                         )
             db.session.add(user)
             db.session.commit()
