@@ -25,7 +25,7 @@ def create_app():
 
     # Set the custom APM Server URL (default: http://localhost:8200)
     #'SERVER_URL': 'https://87aa10499be4400b8b0f6b0ba39ed7d8.apm.ap-northeast-2.aws.elastic-cloud.com:443',
-    'SERVER_URL' : 'http://localhost:8200',
+    'SERVER_URL' : 'http://10.1.3.194:8200',
 
     # Set the service environment
     'ENVIRONMENT': 'production',
